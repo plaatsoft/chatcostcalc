@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'calc.h'
 **
-** Created: Fri 22. Oct 21:37:46 2010
+** Created: Fri 22. Oct 22:42:14 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
