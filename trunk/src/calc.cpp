@@ -1,5 +1,27 @@
+/**
+ *  @file
+ *  @brief The file contain Calc methods
+ *  @author wplaat
+ *
+ *  Copyright (C) 2008-2010 PlaatSoft
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 2.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 #include "calc.h"
 #include "ui_calc.h"
+#include "general.h"
 
 #include "QtGui"
 
@@ -11,7 +33,10 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Chat Cost Calculator v0.1");
+    // Set Windows Title
+    char tmp[100];
+    sprintf(tmp,"%s v%s", APPL_NAME, APPL_VERSION);
+    setWindowTitle(tmp);
 
     // Set fix windows form size.
     setMinimumSize(640,480);
@@ -90,7 +115,7 @@ void Calc::statemachine() {
 void Calc::readSettings()
 {
     // Fetch previous window position
-    QSettings settings("PlaatSoft", "ChatCostCalc");
+    QSettings settings("PlaatSoft", APPL_NAME);
     ui->lineEdit->setText(settings.value("name1", "").toString());
     ui->lineEdit_2->setText(settings.value("name2", "").toString());
     ui->lineEdit_3->setText(settings.value("name3", "").toString());
@@ -111,6 +136,9 @@ void Calc::readSettings()
     ui->spinBox_8->setValue(settings.value("cost8", "").toInt());
     ui->spinBox_9->setValue(settings.value("cost9", "").toInt());
 
+    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
+    move(pos);
+
     qDebug() << "Load settings";
 }
 
@@ -120,7 +148,7 @@ void Calc::readSettings()
 void Calc::writeSettings()
 {
     // Store current window position
-    QSettings settings("PlaatSoft", "ChatCostCalc");
+    QSettings settings("PlaatSoft", APPL_NAME);
     settings.setValue("name1", ui->lineEdit->text());
     settings.setValue("name2", ui->lineEdit_2->text());
     settings.setValue("name3", ui->lineEdit_3->text());
@@ -140,6 +168,8 @@ void Calc::writeSettings()
     settings.setValue("cost7", ui->spinBox_7->value());
     settings.setValue("cost8", ui->spinBox_8->value());
     settings.setValue("cost9", ui->spinBox_9->value());
+
+    settings.setValue("pos", pos());
 
     qDebug() << "Write settings";
 }
