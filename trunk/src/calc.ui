@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_2">
@@ -49,7 +49,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_3">
@@ -67,7 +67,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_4">
@@ -85,7 +85,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_5">
@@ -103,7 +103,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_6">
@@ -121,7 +121,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_7">
@@ -139,7 +139,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
@@ -197,7 +197,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_9">
@@ -215,7 +215,7 @@
     </font>
    </property>
    <property name="maximum">
-    <number>999</number>
+    <number>9999</number>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
