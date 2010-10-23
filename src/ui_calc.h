@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calc.ui'
 **
-** Created: Sat 23. Oct 14:00:45 2010
+** Created: Sat 23. Oct 14:58:19 2010
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -102,37 +102,37 @@ public:
         QFont font;
         font.setPointSize(12);
         spinBox->setFont(font);
-        spinBox->setMaximum(999);
+        spinBox->setMaximum(9999);
         spinBox_2 = new QSpinBox(Calc);
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
         spinBox_2->setGeometry(QRect(280, 80, 71, 21));
         spinBox_2->setFont(font);
-        spinBox_2->setMaximum(999);
+        spinBox_2->setMaximum(9999);
         spinBox_3 = new QSpinBox(Calc);
         spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
         spinBox_3->setGeometry(QRect(280, 130, 71, 21));
         spinBox_3->setFont(font);
-        spinBox_3->setMaximum(999);
+        spinBox_3->setMaximum(9999);
         spinBox_4 = new QSpinBox(Calc);
         spinBox_4->setObjectName(QString::fromUtf8("spinBox_4"));
         spinBox_4->setGeometry(QRect(280, 180, 71, 21));
         spinBox_4->setFont(font);
-        spinBox_4->setMaximum(999);
+        spinBox_4->setMaximum(9999);
         spinBox_5 = new QSpinBox(Calc);
         spinBox_5->setObjectName(QString::fromUtf8("spinBox_5"));
         spinBox_5->setGeometry(QRect(280, 230, 71, 21));
         spinBox_5->setFont(font);
-        spinBox_5->setMaximum(999);
+        spinBox_5->setMaximum(9999);
         spinBox_6 = new QSpinBox(Calc);
         spinBox_6->setObjectName(QString::fromUtf8("spinBox_6"));
         spinBox_6->setGeometry(QRect(280, 280, 71, 21));
         spinBox_6->setFont(font);
-        spinBox_6->setMaximum(999);
+        spinBox_6->setMaximum(9999);
         spinBox_7 = new QSpinBox(Calc);
         spinBox_7->setObjectName(QString::fromUtf8("spinBox_7"));
         spinBox_7->setGeometry(QRect(280, 330, 71, 21));
         spinBox_7->setFont(font);
-        spinBox_7->setMaximum(999);
+        spinBox_7->setMaximum(9999);
         pushButton = new QPushButton(Calc);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(390, 380, 221, 71));
@@ -150,12 +150,12 @@ public:
         spinBox_8->setObjectName(QString::fromUtf8("spinBox_8"));
         spinBox_8->setGeometry(QRect(280, 380, 71, 21));
         spinBox_8->setFont(font);
-        spinBox_8->setMaximum(999);
+        spinBox_8->setMaximum(9999);
         spinBox_9 = new QSpinBox(Calc);
         spinBox_9->setObjectName(QString::fromUtf8("spinBox_9"));
         spinBox_9->setGeometry(QRect(280, 430, 71, 21));
         spinBox_9->setFont(font);
-        spinBox_9->setMaximum(999);
+        spinBox_9->setMaximum(9999);
         lineEdit = new QLineEdit(Calc);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setGeometry(QRect(40, 30, 211, 21));

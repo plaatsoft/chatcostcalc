@@ -51,6 +51,7 @@
  *
  *  <b>23-10-2010 Version 0.20</b>
  *  - Save application position on exit and load it again on startup.
+ *  - Added sound effect.
  *  - Build release with QtCreator v2.0.0
  *
  *  <b>22-10-2010 Version 0.10</b>

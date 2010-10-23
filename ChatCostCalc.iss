@@ -22,6 +22,7 @@ OutputDir=release\
 
 [Files]
 Source: "src\release\ChatCostCalc.exe"; DestDir: "{app}"
+Source: "src\snd\cash1.wav"; DestDir: "{app}\snd"
 Source: "src\release\libgcc_s_dw2-1.dll"; DestDir: "{app}"
 Source: "src\release\mingwm10.dll"; DestDir: "{app}"
 Source: "src\release\QtCore4.dll"; DestDir: "{app}"

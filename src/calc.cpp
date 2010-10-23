@@ -106,6 +106,8 @@ void Calc::statemachine() {
 
      ui->lcdNumber->display(sum);
      ui->timeEdit->setTime(time->addSecs(counter));
+
+     QSound::play("snd/cash1.wav");
    }
 }
 
