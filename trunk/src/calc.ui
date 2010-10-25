@@ -163,23 +163,32 @@
   <widget class="QLCDNumber" name="lcdNumber">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>390</x>
      <y>30</y>
-     <width>171</width>
-     <height>81</height>
+     <width>221</width>
+     <height>71</height>
     </rect>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="midLineWidth">
+    <number>0</number>
    </property>
    <property name="smallDecimalPoint">
     <bool>false</bool>
    </property>
    <property name="numDigits">
-    <number>5</number>
+    <number>8</number>
    </property>
    <property name="digitCount">
-    <number>5</number>
+    <number>8</number>
    </property>
    <property name="segmentStyle">
-    <enum>QLCDNumber::Flat</enum>
+    <enum>QLCDNumber::Filled</enum>
+   </property>
+   <property name="value" stdset="0">
+    <double>0.000000000000000</double>
    </property>
   </widget>
   <widget class="QSpinBox" name="spinBox_8">
@@ -707,15 +716,15 @@
   <widget class="QLabel" name="label_28">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>40</y>
+     <x>400</x>
+     <y>34</y>
      <width>41</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>50</pointsize>
+     <pointsize>40</pointsize>
     </font>
    </property>
    <property name="text">
@@ -736,8 +745,11 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>40</pointsize>
+     <pointsize>35</pointsize>
     </font>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
    <property name="readOnly">
     <bool>true</bool>
@@ -896,14 +908,49 @@
   <widget class="QGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>240</y>
-     <width>131</width>
-     <height>111</height>
+     <x>390</x>
+     <y>230</y>
+     <width>221</width>
+     <height>121</height>
     </rect>
    </property>
    <property name="lineWidth">
     <number>0</number>
+   </property>
+   <property name="backgroundBrush">
+    <brush brushstyle="NoBrush">
+     <color alpha="0">
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+     </color>
+    </brush>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_29">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>10</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Total Cost</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_30">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>110</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Total Time</string>
    </property>
   </widget>
  </widget>

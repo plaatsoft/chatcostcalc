@@ -23,11 +23,10 @@
 #define GENERAL_H
 
 #define APPL_NAME             "ChatCostCalc"
-#define APPL_VERSION          "0.20"
-#define APPL_DATE             "23-10-2010"
+#define APPL_VERSION          "0.30"
+#define APPL_DATE             "25-10-2010"
 
 #endif // GENERAL_H
-
 
 /**
  * @mainpage ChatCostCalc Documentation
@@ -49,9 +48,13 @@
  *
  * @section ReleaseNotes
  *
+ *  <b>25-10-2010 Version 0.20</b>
+ *  - Improve screen layout.
+ *  - Build release with QtCreator v2.0.0
+ *
  *  <b>23-10-2010 Version 0.20</b>
  *  - Save application position on exit and load it again on startup.
- *  - Added sound effect.
+ *  - Added sound effects.
  *  - Build release with QtCreator v2.0.0
  *
  *  <b>22-10-2010 Version 0.10</b>
