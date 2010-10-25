@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calc.ui'
 **
-** Created: Sat 23. Oct 14:58:19 2010
+** Created: Mon 25. Oct 07:06:07 2010
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -89,6 +89,8 @@ public:
     QCheckBox *checkBox_8;
     QCheckBox *checkBox_9;
     QGraphicsView *graphicsView;
+    QLabel *label_29;
+    QLabel *label_30;
 
     void setupUi(QWidget *Calc)
     {
@@ -141,11 +143,14 @@ public:
         pushButton->setFont(font1);
         lcdNumber = new QLCDNumber(Calc);
         lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
-        lcdNumber->setGeometry(QRect(440, 30, 171, 81));
+        lcdNumber->setGeometry(QRect(390, 30, 221, 71));
+        lcdNumber->setLineWidth(1);
+        lcdNumber->setMidLineWidth(0);
         lcdNumber->setSmallDecimalPoint(false);
-        lcdNumber->setNumDigits(5);
-        lcdNumber->setDigitCount(5);
-        lcdNumber->setSegmentStyle(QLCDNumber::Flat);
+        lcdNumber->setNumDigits(8);
+        lcdNumber->setDigitCount(8);
+        lcdNumber->setSegmentStyle(QLCDNumber::Filled);
+        lcdNumber->setProperty("value", QVariant(0));
         spinBox_8 = new QSpinBox(Calc);
         spinBox_8->setObjectName(QString::fromUtf8("spinBox_8"));
         spinBox_8->setGeometry(QRect(280, 380, 71, 21));
@@ -275,17 +280,18 @@ public:
         label_27->setGeometry(QRect(270, 430, 16, 20));
         label_28 = new QLabel(Calc);
         label_28->setObjectName(QString::fromUtf8("label_28"));
-        label_28->setGeometry(QRect(390, 40, 41, 61));
+        label_28->setGeometry(QRect(400, 34, 41, 61));
         QFont font2;
-        font2.setPointSize(50);
+        font2.setPointSize(40);
         label_28->setFont(font2);
         timeEdit = new QTimeEdit(Calc);
         timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
         timeEdit->setEnabled(false);
         timeEdit->setGeometry(QRect(390, 130, 221, 71));
         QFont font3;
-        font3.setPointSize(40);
+        font3.setPointSize(35);
         timeEdit->setFont(font3);
+        timeEdit->setAlignment(Qt::AlignCenter);
         timeEdit->setReadOnly(true);
         timeEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);
         checkBox = new QCheckBox(Calc);
@@ -326,8 +332,17 @@ public:
         checkBox_9->setChecked(true);
         graphicsView = new QGraphicsView(Calc);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setGeometry(QRect(430, 240, 131, 111));
+        graphicsView->setGeometry(QRect(390, 230, 221, 121));
         graphicsView->setLineWidth(0);
+        QBrush brush(QColor(0, 0, 0, 0));
+        brush.setStyle(Qt::NoBrush);
+        graphicsView->setBackgroundBrush(brush);
+        label_29 = new QLabel(Calc);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setGeometry(QRect(390, 10, 91, 16));
+        label_30 = new QLabel(Calc);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setGeometry(QRect(390, 110, 91, 16));
         QWidget::setTabOrder(checkBox, lineEdit);
         QWidget::setTabOrder(lineEdit, spinBox);
         QWidget::setTabOrder(spinBox, checkBox_2);
@@ -404,6 +419,8 @@ public:
         checkBox_7->setText(QString());
         checkBox_8->setText(QString());
         checkBox_9->setText(QString());
+        label_29->setText(QApplication::translate("Calc", "Total Cost", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("Calc", "Total Time", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -56,7 +56,7 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     // Init statemachine
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(statemachine()));
-    timer->start(1000);
+    timer->start(990);
 }
 
 Calc::~Calc()
@@ -104,7 +104,9 @@ void Calc::statemachine() {
 
      qDebug() << "total" << total << "counter" << counter << "sum" << sum;
 
-     ui->lcdNumber->display(sum);
+     char tmp[10];
+     sprintf(tmp,"%0.2f",sum);
+     ui->lcdNumber->display(QString(tmp));
      ui->timeEdit->setTime(time->addSecs(counter));
 
      QSound::play("snd/cash1.wav");
