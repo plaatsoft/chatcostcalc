@@ -46,6 +46,7 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     readSettings();
 
     start=false;
+    pause=false;
     counter=0;
 
     sprintf(tmp,"%0.2f",0.0);
@@ -75,34 +76,16 @@ void Calc::statemachine() {
    if (start) {
      counter++;
      int total=0;
+     bool ok;
 
-     /*if (ui->checkBox->checkState()) {
-         total+=ui->spinBox->value();
+     // Get all hour values
+     for (int i=0;i<ui->spinBox->value();i++) {
+
+        if (ui->tableWidget->item(i, 0)->checkState()) {
+            total+=ui->tableWidget->item(i,2)->text().toInt(&ok,10);
+            qDebug() << "total" << total;
+        }
      }
-     if (ui->checkBox_2->checkState()) {
-        total+=ui->spinBox_2->value();
-     }
-     if (ui->checkBox_3->checkState()) {
-        total+=ui->spinBox_3->value();
-     }
-     if (ui->checkBox_4->checkState()) {
-        total+=ui->spinBox_4->value();
-     }
-     if (ui->checkBox_5->checkState()) {
-        total+=ui->spinBox_5->value();
-     }
-     if (ui->checkBox_6->checkState()) {
-        total+=ui->spinBox_6->value();
-     }
-     if (ui->checkBox_7->checkState()) {
-        total+=ui->spinBox_7->value();
-     }
-     if (ui->checkBox_8->checkState()) {
-        total+=ui->spinBox_8->value();
-     }
-     if (ui->checkBox_9->checkState()) {
-        total+=ui->spinBox_9->value();
-     }*/
      sum+= total * (1/3600.0);
 
      qDebug() << "total" << total << "counter" << counter << "sum" << sum;
@@ -123,28 +106,13 @@ void Calc::readSettings()
 {
     // Fetch previous window position
     QSettings settings("PlaatSoft", APPL_NAME);
-    /*ui->lineEdit->setText(settings.value("name1", "").toString());
-    ui->lineEdit_2->setText(settings.value("name2", "").toString());
-    ui->lineEdit_3->setText(settings.value("name3", "").toString());
-    ui->lineEdit_4->setText(settings.value("name4", "").toString());
-    ui->lineEdit_5->setText(settings.value("name5", "").toString());
-    ui->lineEdit_6->setText(settings.value("name6", "").toString());
-    ui->lineEdit_7->setText(settings.value("name7", "").toString());
-    ui->lineEdit_8->setText(settings.value("name8", "").toString());
-    ui->lineEdit_9->setText(settings.value("name9", "").toString());
-
-    ui->spinBox->setValue(settings.value("cost1", "").toInt());
-    ui->spinBox_2->setValue(settings.value("cost2", "").toInt());
-    ui->spinBox_3->setValue(settings.value("cost3", "").toInt());
-    ui->spinBox_4->setValue(settings.value("cost4", "").toInt());
-    ui->spinBox_5->setValue(settings.value("cost5", "").toInt());
-    ui->spinBox_6->setValue(settings.value("cost6", "").toInt());
-    ui->spinBox_7->setValue(settings.value("cost7", "").toInt());
-    ui->spinBox_8->setValue(settings.value("cost8", "").toInt());
-    ui->spinBox_9->setValue(settings.value("cost9", "").toInt());*/
 
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     move(pos);
+
+    int value = settings.value("amount", "0").toInt();
+    ui->spinBox->setValue(value);
+    on_spinBox_valueChanged(value);
 
     qDebug() << "Load settings";
 }
@@ -154,28 +122,22 @@ void Calc::readSettings()
  */
 void Calc::writeSettings()
 {
+    bool ok;
+
     // Store current window position
     QSettings settings("PlaatSoft", APPL_NAME);
-    /*settings.setValue("name1", ui->lineEdit->text());
-    settings.setValue("name2", ui->lineEdit_2->text());
-    settings.setValue("name3", ui->lineEdit_3->text());
-    settings.setValue("name4", ui->lineEdit_4->text());
-    settings.setValue("name5", ui->lineEdit_5->text());
-    settings.setValue("name6", ui->lineEdit_6->text());
-    settings.setValue("name7", ui->lineEdit_7->text());
-    settings.setValue("name8", ui->lineEdit_8->text());
-    settings.setValue("name9", ui->lineEdit_9->text());
 
-    settings.setValue("cost1", ui->spinBox->value());
-    settings.setValue("cost2", ui->spinBox_2->value());
-    settings.setValue("cost3", ui->spinBox_3->value());
-    settings.setValue("cost4", ui->spinBox_4->value());
-    settings.setValue("cost5", ui->spinBox_5->value());
-    settings.setValue("cost6", ui->spinBox_6->value());
-    settings.setValue("cost7", ui->spinBox_7->value());
-    settings.setValue("cost8", ui->spinBox_8->value());
-    settings.setValue("cost9", ui->spinBox_9->value());*/
+    // Get all hour values
+    for (int i=0; i<ui->spinBox->value(); i++) {
 
+       QString key = QString("name%1").arg(i+1);
+       settings.setValue(key, ui->tableWidget->item(i,1)->text());
+
+       key = QString("cost%1").arg(i+1);
+       settings.setValue(key, ui->tableWidget->item(i,2)->text().toInt(&ok,10));
+    }
+
+    settings.setValue("amount", ui->spinBox->value());
     settings.setValue("pos", pos());
 
     qDebug() << "Write settings";
@@ -185,6 +147,9 @@ void Calc::writeSettings()
 // User Actions
 // -----------------------------------------
 
+/**
+ * Start & Hold button
+ */
 void Calc::on_pushButton_clicked()
 {
    if (start) {
@@ -208,6 +173,66 @@ void Calc::on_pushButton_clicked()
 }
 
 /**
+ * Pause & continue button
+ */
+void Calc::on_holdButton_clicked()
+{
+   if (pause) {
+       ui->holdButton->setText("Continue");
+      pause=false;
+   } else {
+      ui->holdButton->setText("Pause");
+      pause=true;
+   }
+}
+
+void Calc::on_spinBox_valueChanged(int value)
+{
+   // Set table dimensions
+   ui->tableWidget->setColumnCount(3);
+   ui->tableWidget->setRowCount(value);
+
+    QTableWidgetItem *item;
+
+   // Build Header
+   ui->tableWidget->setColumnWidth(0,20);
+   item = new QTableWidgetItem("");
+   ui->tableWidget->setHorizontalHeaderItem(0, item);
+   ui->tableWidget->setColumnWidth(1,170);
+   item = new QTableWidgetItem("Member Name");
+   ui->tableWidget->setHorizontalHeaderItem(1, item);
+   ui->tableWidget->setColumnWidth(2,90);
+   item = new QTableWidgetItem("Member Cost");
+   ui->tableWidget->setHorizontalHeaderItem(2, item);
+
+   QSettings settings("PlaatSoft", APPL_NAME);
+
+   // Build Content
+   for (int i=0; i<value; i++)
+   {
+      item = new QTableWidgetItem();
+      item->setCheckState(Qt::Checked);
+      ui->tableWidget->setItem(i, 0, item);
+
+      QString key = QString("name%1").arg(i+1);
+      item = new QTableWidgetItem(settings.value(key, "").toString());
+      ui->tableWidget->setItem(i, 1, item);
+
+      key = QString("cost%1").arg(i+1);
+      item = new QTableWidgetItem(settings.value(key, "").toString());
+      ui->tableWidget->setItem(i, 2, item);
+   }
+
+   ui->dial->setValue(value);
+}
+
+void Calc::on_dial_valueChanged(int value)
+{
+    ui->spinBox->setValue(value);
+    on_spinBox_valueChanged(value);
+}
+
+/**
  * Close Window
  */
 void Calc::closeEvent(QCloseEvent *event)
@@ -219,3 +244,4 @@ void Calc::closeEvent(QCloseEvent *event)
 // -----------------------------------------
 // The End
 // -----------------------------------------
+
