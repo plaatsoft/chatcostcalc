@@ -23,8 +23,11 @@
 #define GENERAL_H
 
 #define APPL_NAME             "ChatCostCalc"
-#define APPL_VERSION          "0.30"
+#define APPL_VERSION          "0.31"
 #define APPL_DATE             "25-10-2010"
+
+#define HORZ_SIZE             530
+#define VERT_SIZE             210
 
 #endif // GENERAL_H
 

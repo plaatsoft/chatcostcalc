@@ -39,14 +39,17 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     setWindowTitle(tmp);
 
     // Set fix windows form size.
-    setMinimumSize(640,480);
-    setMaximumSize(640,480);
+    setMinimumSize(HORZ_SIZE,VERT_SIZE);
+    setMaximumSize(HORZ_SIZE,VERT_SIZE);
 
     // Read registry setting data
     readSettings();
 
     start=false;
     counter=0;
+
+    sprintf(tmp,"%0.2f",0.0);
+    ui->lcdNumber->display(QString(tmp));
 
     // Add background screen
     scene = new QGraphicsScene();
@@ -73,7 +76,7 @@ void Calc::statemachine() {
      counter++;
      int total=0;
 
-     if (ui->checkBox->checkState()) {
+     /*if (ui->checkBox->checkState()) {
          total+=ui->spinBox->value();
      }
      if (ui->checkBox_2->checkState()) {
@@ -99,7 +102,7 @@ void Calc::statemachine() {
      }
      if (ui->checkBox_9->checkState()) {
         total+=ui->spinBox_9->value();
-     }
+     }*/
      sum+= total * (1/3600.0);
 
      qDebug() << "total" << total << "counter" << counter << "sum" << sum;
@@ -120,7 +123,7 @@ void Calc::readSettings()
 {
     // Fetch previous window position
     QSettings settings("PlaatSoft", APPL_NAME);
-    ui->lineEdit->setText(settings.value("name1", "").toString());
+    /*ui->lineEdit->setText(settings.value("name1", "").toString());
     ui->lineEdit_2->setText(settings.value("name2", "").toString());
     ui->lineEdit_3->setText(settings.value("name3", "").toString());
     ui->lineEdit_4->setText(settings.value("name4", "").toString());
@@ -138,7 +141,7 @@ void Calc::readSettings()
     ui->spinBox_6->setValue(settings.value("cost6", "").toInt());
     ui->spinBox_7->setValue(settings.value("cost7", "").toInt());
     ui->spinBox_8->setValue(settings.value("cost8", "").toInt());
-    ui->spinBox_9->setValue(settings.value("cost9", "").toInt());
+    ui->spinBox_9->setValue(settings.value("cost9", "").toInt());*/
 
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     move(pos);
@@ -153,7 +156,7 @@ void Calc::writeSettings()
 {
     // Store current window position
     QSettings settings("PlaatSoft", APPL_NAME);
-    settings.setValue("name1", ui->lineEdit->text());
+    /*settings.setValue("name1", ui->lineEdit->text());
     settings.setValue("name2", ui->lineEdit_2->text());
     settings.setValue("name3", ui->lineEdit_3->text());
     settings.setValue("name4", ui->lineEdit_4->text());
@@ -171,7 +174,7 @@ void Calc::writeSettings()
     settings.setValue("cost6", ui->spinBox_6->value());
     settings.setValue("cost7", ui->spinBox_7->value());
     settings.setValue("cost8", ui->spinBox_8->value());
-    settings.setValue("cost9", ui->spinBox_9->value());
+    settings.setValue("cost9", ui->spinBox_9->value());*/
 
     settings.setValue("pos", pos());
 
@@ -193,8 +196,14 @@ void Calc::on_pushButton_clicked()
       counter=0;
       sum=0;
       time=new QTime(0,0,0,0);
+
       ui->pushButton->setText("Stop");
-      ui->lcdNumber->display(counter);
+
+      char tmp[10];
+      sprintf(tmp,"%0.2f",0.0);
+      ui->timeEdit->setTime(time->addSecs(counter));
+
+      ui->lcdNumber->display(QString(tmp));
    }
 }
 
