@@ -9,8 +9,8 @@
 AppPublisher=PlaatSoft
 AppPublisherURL=http://www.plaatsoft.nl
 AppName=ChatCostCalc
-AppVerName=PlaatSoft ChatCostCalc v0.30
-AppVersion=0.30
+AppVerName=PlaatSoft ChatCostCalc v0.40
+AppVersion=0.40
 AppCopyright=Copyright (C) 2008-2010 PlaatSoft
 
 DefaultDirName={pf}\ChatCostCalc

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calc.ui'
 **
-** Created: Mon 25. Oct 17:35:38 2010
+** Created: Wed 27. Oct 19:24:08 2010
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -102,22 +102,17 @@ public:
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         tableWidget = new QTableWidget(tab_2);
-        if (tableWidget->columnCount() < 3)
-            tableWidget->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setGeometry(QRect(10, 10, 321, 161));
+        tableWidget->setColumnCount(0);
         spinBox = new QSpinBox(tab_2);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
-        spinBox->setGeometry(QRect(350, 30, 51, 22));
+        spinBox->setGeometry(QRect(350, 30, 71, 22));
+        spinBox->setMaximum(20);
         spinBox_2 = new QSpinBox(tab_2);
         spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
         spinBox_2->setGeometry(QRect(350, 150, 71, 22));
+        spinBox_2->setMaximum(99999);
         label_2 = new QLabel(tab_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(350, 130, 46, 13));
@@ -126,7 +121,8 @@ public:
         label_3->setGeometry(QRect(350, 10, 81, 16));
         dial = new QDial(tab_2);
         dial->setObjectName(QString::fromUtf8("dial"));
-        dial->setGeometry(QRect(390, 40, 91, 101));
+        dial->setGeometry(QRect(400, 60, 71, 81));
+        dial->setMaximum(20);
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
@@ -141,7 +137,7 @@ public:
         graphicsView->setBackgroundBrush(brush);
         label = new QLabel(tab_3);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(140, 10, 331, 101));
+        label->setGeometry(QRect(140, 10, 331, 151));
         tabWidget->addTab(tab_3, QString());
         QWidget::setTabOrder(timeEdit, pushButton);
 
@@ -159,14 +155,8 @@ public:
         pushButton->setText(QApplication::translate("Calc", "Start", 0, QApplication::UnicodeUTF8));
         timeEdit->setDisplayFormat(QApplication::translate("Calc", "HH:mm:ss", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("Calc", "\342\202\254", 0, QApplication::UnicodeUTF8));
-        holdButton->setText(QApplication::translate("Calc", "Hold", 0, QApplication::UnicodeUTF8));
+        holdButton->setText(QApplication::translate("Calc", "Pause", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Calc", "General", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("Calc", "Active", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("Calc", "Member Name", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("Calc", "Member Cost", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Calc", "Total Cost", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Calc", "Total Members", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Calc", "Settings", 0, QApplication::UnicodeUTF8));
@@ -178,9 +168,13 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">This tool calculate real-time the cost of a chat or meeting.</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-rig"
-                        "ht:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">All Copyrights reserved (c) 2008-2010 PlaatSoft</span></p>\n"
+                        "ht:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Created by</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Willem van der Plaat</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Martijn Stalenhoef</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Marius Hoekenga</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-style:italic;\">New version is available on www.plaatsoft.nl</span></p></body></html>", 0, QApplication::UnicodeUTF8));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">All Copyrights"
+                        " reserved (c) 2008-2010 PlaatSoft</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("Calc", "About", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

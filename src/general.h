@@ -23,8 +23,8 @@
 #define GENERAL_H
 
 #define APPL_NAME             "ChatCostCalc"
-#define APPL_VERSION          "0.31"
-#define APPL_DATE             "25-10-2010"
+#define APPL_VERSION          "0.40"
+#define APPL_DATE             "27-10-2010"
 
 #define HORZ_SIZE             530
 #define VERT_SIZE             210
@@ -51,7 +51,13 @@
  *
  * @section ReleaseNotes
  *
- *  <b>25-10-2010 Version 0.20</b>
+ *  <b>27-10-2010 Version 0.40</b>
+ *  - Improve screen layout.
+ *  - Added setting and about tab.
+ *  - Add support for up to 20 members.
+ *  - Build release with QtCreator v2.0.0
+ *
+ *  <b>25-10-2010 Version 0.30</b>
  *  - Improve screen layout.
  *  - Build release with QtCreator v2.0.0
  *
