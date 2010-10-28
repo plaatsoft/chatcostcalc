@@ -57,10 +57,10 @@ private:
     void closeEvent(QCloseEvent *event);
 
 private slots:
-    void on_holdButton_clicked();
+    void on_pauseButton_clicked();
+    void on_startButton_clicked();
     void on_dial_valueChanged(int value);
     void on_spinBox_valueChanged(int );
-    void on_pushButton_clicked();
 };
 
 #endif // CALC_H
