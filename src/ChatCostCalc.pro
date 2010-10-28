@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += network core gui
 
 TARGET = ChatCostCalc
 TEMPLATE = app

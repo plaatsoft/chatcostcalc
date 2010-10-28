@@ -56,6 +56,7 @@
  *  - Added Pause/Continue button.
  *  - Added Sound enable/disable option
  *  - Added support for up to 20 members.
+ *  - Added new version check on internet.
  *  - Build release with QtCreator v2.0.0
  *
  *  <b>25-10-2010 Version 0.30</b>

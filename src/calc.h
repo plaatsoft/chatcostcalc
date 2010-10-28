@@ -22,8 +22,9 @@
 #ifndef CALC_H
 #define CALC_H
 
-#include <QWidget>
 #include <QtGui>
+#include <QWidget>
+#include <QtNetwork>
 
 namespace Ui {
     class Calc;
@@ -45,6 +46,8 @@ private:
     QTimer *timer;
     QTime *time;
     QGraphicsScene *scene;
+    QNetworkAccessManager *manager;
+    QAction *fetchAct;
 
     bool start;
     bool pause;
@@ -55,12 +58,17 @@ private:
     void writeSettings();
 
     void closeEvent(QCloseEvent *event);
+    void initNetwork(void);
+    void parseVersion(QString response);
 
 private slots:
+    void on_maxCostSpinBox_valueChanged(int );
     void on_pauseButton_clicked();
     void on_startButton_clicked();
     void on_dial_valueChanged(int value);
     void on_spinBox_valueChanged(int );
+    void fetchVersion();
+    void replyFinished(QNetworkReply *);
 };
 
 #endif // CALC_H
