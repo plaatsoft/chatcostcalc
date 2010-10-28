@@ -29,6 +29,9 @@
 // Constructor & Destructor
 // -----------------------------------------
 
+/**
+ * Constructor
+ */
 Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
 {
     ui->setupUi(this);
@@ -48,6 +51,7 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     start=false;
     pause=false;
     counter=0;
+    ui->pauseButton->setEnabled(false);
 
     sprintf(tmp,"%0.2f",0.0);
     ui->lcdNumber->display(QString(tmp));
@@ -63,6 +67,9 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     timer->start(990);
 }
 
+/**
+ * Destructor
+ */
 Calc::~Calc()
 {
     delete ui;
@@ -72,30 +79,46 @@ Calc::~Calc()
 // Other
 // -----------------------------------------
 
+/**
+ * State Machine is executed every second
+ */
 void Calc::statemachine() {
+
+   // If start calculate cost of second.
    if (start) {
      counter++;
      int total=0;
      bool ok;
 
-     // Get all hour values
-     for (int i=0;i<ui->spinBox->value();i++) {
+     if (!pause) {
 
-        if (ui->tableWidget->item(i, 0)->checkState()) {
+        // Get all hour values
+        for (int i=0;i<ui->spinBox->value();i++) {
+
+         if (ui->tableWidget->item(i, 0)->checkState()) {
             total+=ui->tableWidget->item(i,2)->text().toInt(&ok,10);
             qDebug() << "total" << total;
-        }
+         }
+       }
+       sum+= total * (1/3600.0);
+       qDebug() << "total" << total << "counter" << counter << "sum" << sum;
+    }
+
+    // Update real-time cost on screen
+    char tmp[10];
+    sprintf(tmp,"%0.2f",sum);
+    ui->lcdNumber->display(QString(tmp));
+    if (sum>=ui->maxCostSpinBox->value()) {
+       ui->lcdNumber->setStyleSheet("QLCDNumber { text:color:#ff0000; }");
+    }
+
+    // Update time onscreen
+    ui->timeEdit->setTime(time->addSecs(counter));
+
+    // Play sound effect if actived.
+    if (ui->SoundcheckBox->checkState()) {
+         QSound::play("snd/cash1.wav");
      }
-     sum+= total * (1/3600.0);
-
-     qDebug() << "total" << total << "counter" << counter << "sum" << sum;
-
-     char tmp[10];
-     sprintf(tmp,"%0.2f",sum);
-     ui->lcdNumber->display(QString(tmp));
-     ui->timeEdit->setTime(time->addSecs(counter));
-
-     QSound::play("snd/cash1.wav");
    }
 }
 
@@ -107,12 +130,22 @@ void Calc::readSettings()
     // Fetch previous window position
     QSettings settings("PlaatSoft", APPL_NAME);
 
+    // Load location setting
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     move(pos);
 
+    // Load sound effect settig
+    bool sound = settings.value("sound", true).toBool();
+    ui->SoundcheckBox->setChecked(sound);
+
+    // Load Amount of member setting
     int value = settings.value("amount", "0").toInt();
     ui->spinBox->setValue(value);
     on_spinBox_valueChanged(value);
+
+    // Load Max Cost setting
+    value = settings.value("total", "0").toInt();
+    ui->maxCostSpinBox->setValue(value);
 
     qDebug() << "Load settings";
 }
@@ -124,10 +157,9 @@ void Calc::writeSettings()
 {
     bool ok;
 
-    // Store current window position
     QSettings settings("PlaatSoft", APPL_NAME);
 
-    // Get all hour values
+    // Store grid data
     for (int i=0; i<ui->spinBox->value(); i++) {
 
        QString key = QString("name%1").arg(i+1);
@@ -137,7 +169,10 @@ void Calc::writeSettings()
        settings.setValue(key, ui->tableWidget->item(i,2)->text().toInt(&ok,10));
     }
 
+    // Store other settings
+    settings.setValue("sound",ui->SoundcheckBox->checkState());
     settings.setValue("amount", ui->spinBox->value());
+    settings.setValue("total", ui->maxCostSpinBox->value());
     settings.setValue("pos", pos());
 
     qDebug() << "Write settings";
@@ -148,21 +183,27 @@ void Calc::writeSettings()
 // -----------------------------------------
 
 /**
- * Start & Hold button
+ * Start & Stop button
  */
-void Calc::on_pushButton_clicked()
+
+void Calc::on_startButton_clicked()
 {
    if (start) {
       start=false;
-      ui->pushButton->setText("Start");
+      ui->startButton->setText("Start");
+
+      ui->pauseButton->setEnabled(false);
+      pause=false;
+      ui->pauseButton->setText("Pause");
 
    } else {
       start=true;
       counter=0;
       sum=0;
       time=new QTime(0,0,0,0);
+      ui->pauseButton->setEnabled(true);
 
-      ui->pushButton->setText("Stop");
+      ui->startButton->setText("Stop");
 
       char tmp[10];
       sprintf(tmp,"%0.2f",0.0);
@@ -175,17 +216,20 @@ void Calc::on_pushButton_clicked()
 /**
  * Pause & continue button
  */
-void Calc::on_holdButton_clicked()
+void Calc::on_pauseButton_clicked()
 {
    if (pause) {
-       ui->holdButton->setText("Continue");
+       ui->pauseButton->setText("Pause");
       pause=false;
    } else {
-      ui->holdButton->setText("Pause");
+      ui->pauseButton->setText("Continue");
       pause=true;
    }
 }
 
+/**
+ * Spinbox on change event
+ */
 void Calc::on_spinBox_valueChanged(int value)
 {
    // Set table dimensions
@@ -198,9 +242,11 @@ void Calc::on_spinBox_valueChanged(int value)
    ui->tableWidget->setColumnWidth(0,20);
    item = new QTableWidgetItem("");
    ui->tableWidget->setHorizontalHeaderItem(0, item);
+
    ui->tableWidget->setColumnWidth(1,170);
    item = new QTableWidgetItem("Member Name");
    ui->tableWidget->setHorizontalHeaderItem(1, item);
+
    ui->tableWidget->setColumnWidth(2,90);
    item = new QTableWidgetItem("Member Cost");
    ui->tableWidget->setHorizontalHeaderItem(2, item);
@@ -226,6 +272,9 @@ void Calc::on_spinBox_valueChanged(int value)
    ui->dial->setValue(value);
 }
 
+/**
+ * Dailer on change event
+ */
 void Calc::on_dial_valueChanged(int value)
 {
     ui->spinBox->setValue(value);
@@ -244,4 +293,3 @@ void Calc::closeEvent(QCloseEvent *event)
 // -----------------------------------------
 // The End
 // -----------------------------------------
-
