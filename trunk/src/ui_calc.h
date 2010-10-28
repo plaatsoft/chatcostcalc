@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'calc.ui'
 **
-** Created: Thu 28. Oct 07:17:16 2010
+** Created: Thu 28. Oct 17:36:39 2010
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -50,6 +50,7 @@ public:
     QWidget *tab_3;
     QGraphicsView *graphicsView;
     QLabel *label;
+    QLabel *label_4;
 
     void setupUi(QWidget *Calc)
     {
@@ -78,7 +79,7 @@ public:
         lcdNumber->setSmallDecimalPoint(false);
         lcdNumber->setNumDigits(8);
         lcdNumber->setDigitCount(8);
-        lcdNumber->setSegmentStyle(QLCDNumber::Filled);
+        lcdNumber->setSegmentStyle(QLCDNumber::Flat);
         lcdNumber->setProperty("value", QVariant(0));
         timeEdit = new QTimeEdit(tab);
         timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
@@ -92,7 +93,7 @@ public:
         timeEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);
         label_28 = new QLabel(tab);
         label_28->setObjectName(QString::fromUtf8("label_28"));
-        label_28->setGeometry(QRect(20, 10, 41, 61));
+        label_28->setGeometry(QRect(20, 10, 41, 66));
         QFont font2;
         font2.setPointSize(40);
         label_28->setFont(font2);
@@ -118,7 +119,7 @@ public:
         maxCostSpinBox->setMaximum(99999);
         label_2 = new QLabel(tab_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(350, 130, 46, 13));
+        label_2->setGeometry(QRect(350, 130, 71, 16));
         label_3 = new QLabel(tab_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(350, 10, 81, 16));
@@ -143,7 +144,10 @@ public:
         graphicsView->setBackgroundBrush(brush);
         label = new QLabel(tab_3);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(150, 10, 321, 161));
+        label->setGeometry(QRect(150, 10, 321, 121));
+        label_4 = new QLabel(tab_3);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(40, 140, 411, 31));
         tabWidget->addTab(tab_3, QString());
         QWidget::setTabOrder(timeEdit, startButton);
 
@@ -163,7 +167,7 @@ public:
         label_28->setText(QApplication::translate("Calc", "\342\202\254", 0, QApplication::UnicodeUTF8));
         pauseButton->setText(QApplication::translate("Calc", "Pause", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Calc", "General", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("Calc", "Total Cost", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("Calc", "Maximum Cost", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("Calc", "Total Members", 0, QApplication::UnicodeUTF8));
         SoundcheckBox->setText(QApplication::translate("Calc", "Sound", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Calc", "Settings", 0, QApplication::UnicodeUTF8));
@@ -171,20 +175,23 @@ public:
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; font-weight:600;\">Chat Cost Calcuator</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt; font-weight:600;\">Chat Cost Calculator v0.40</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">This tool calculate real-time the cost of a chat or meeting. </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Amount of members can be controlled in the setting tab.</span></p>\n"
-"<p style=\" margin-to"
-                        "p:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Check www.plaatsoft.nl for the latest information</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Amount of members can be controlled in the settings tab.</span></p>\n"
+"<p style=\" m"
+                        "argin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Check www.plaatsoft.nl for the latest information.</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Created by</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Created by:</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Willem van der Plaat </span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Martijn Stalenhoef</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -q"
-                        "t-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Marius Hoekenga</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">All copyrights reserved (c) 2008-2010 PlaatSoft</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p></body></html>", 0, QApplication::UnicodeUTF8));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">Marius Hoekenga</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margi"
+                        "n-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p></body></html>", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("Calc", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#000000;\">This software is open source and may be copied, distributed or modified </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt; color:#000000;\">   under the terms of the GNU General Public License (GPL) version 2</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("Calc", "About", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

@@ -61,10 +61,15 @@ Calc::Calc(QWidget *parent) : QWidget(parent), ui(new Ui::Calc)
     scene->addPixmap(QPixmap(":/images/logo.png"));
     ui->graphicsView->setScene(scene);
 
+    ui->timeEdit->setStyleSheet("QTimeEdit { background-color:#ffffff;color:#000000 }");
+
     // Init statemachine
     timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(statemachine()));
-    timer->start(990);
+    timer->start(190);
+
+    // Initi Netwokr layer
+    initNetwork();
 }
 
 /**
@@ -95,30 +100,33 @@ void Calc::statemachine() {
         // Get all hour values
         for (int i=0;i<ui->spinBox->value();i++) {
 
-         if (ui->tableWidget->item(i, 0)->checkState()) {
-            total+=ui->tableWidget->item(i,2)->text().toInt(&ok,10);
-            qDebug() << "total" << total;
+            if (ui->tableWidget->item(i, 0)->checkState()) {
+               total+=ui->tableWidget->item(i,2)->text().toInt(&ok,10);
+               qDebug() << "total" << total;
+            }
          }
-       }
-       sum+= total * (1/3600.0);
-       qDebug() << "total" << total << "counter" << counter << "sum" << sum;
-    }
+         sum+= total * (1/36000.0);
+         qDebug() << "total" << total << "counter" << counter << "sum" << sum;
+      }
 
-    // Update real-time cost on screen
-    char tmp[10];
-    sprintf(tmp,"%0.2f",sum);
-    ui->lcdNumber->display(QString(tmp));
-    if (sum>=ui->maxCostSpinBox->value()) {
-       ui->lcdNumber->setStyleSheet("QLCDNumber { text:color:#ff0000; }");
-    }
+      // Update real-time cost on screen
+      char tmp[10];
+      sprintf(tmp,"%0.2f",sum);
+      ui->lcdNumber->display(QString(tmp));
 
-    // Update time onscreen
-    ui->timeEdit->setTime(time->addSecs(counter));
+      // Check max cost limit
+      if (sum>=ui->maxCostSpinBox->value() && (ui->maxCostSpinBox->value()!=0)) {
+         ui->lcdNumber->setStyleSheet("QLCDNumber { background-color:#ff0000; }");
+         ui->timeEdit->setStyleSheet("QTimeEdit { background-color:#ff0000;color:#000000 }");
+      }
 
-    // Play sound effect if actived.
-    if (ui->SoundcheckBox->checkState()) {
-         QSound::play("snd/cash1.wav");
-     }
+      // Update time onscreen
+      ui->timeEdit->setTime(time->addSecs(counter/5));
+
+      // Play sound effect if actived.
+      if (!pause && ui->SoundcheckBox->checkState() && (counter%10==0)) {
+           QSound::play("snd/cash1.wav");
+      }
    }
 }
 
@@ -208,8 +216,9 @@ void Calc::on_startButton_clicked()
       char tmp[10];
       sprintf(tmp,"%0.2f",0.0);
       ui->timeEdit->setTime(time->addSecs(counter));
-
       ui->lcdNumber->display(QString(tmp));
+      ui->lcdNumber->setStyleSheet("QLCDNumber { background-color:#ffffff; }");
+      ui->timeEdit->setStyleSheet("QTimeEdit { background-color:#ffffff;color:#000000 }");
    }
 }
 
@@ -272,6 +281,12 @@ void Calc::on_spinBox_valueChanged(int value)
    ui->dial->setValue(value);
 }
 
+void Calc::on_maxCostSpinBox_valueChanged(int )
+{
+   ui->lcdNumber->setStyleSheet("QLCDNumber { background-color:#ffffff; }");
+   ui->timeEdit->setStyleSheet("QTimeEdit { background-color:#ffffff;color:#000000 }");
+}
+
 /**
  * Dailer on change event
  */
@@ -288,6 +303,81 @@ void Calc::closeEvent(QCloseEvent *event)
 {
    // Store current window position
    writeSettings();
+}
+
+// ------------------------------
+// Network
+// ------------------------------
+
+/**
+ * Start network
+ */
+void Calc::initNetwork(void)
+{
+   manager = new QNetworkAccessManager(this);
+
+   connect( manager,
+         SIGNAL(finished(QNetworkReply*)),
+         this,
+         SLOT(replyFinished(QNetworkReply*)) );
+
+   fetchVersion();
+}
+
+/**
+ * Process incoming http response
+ */
+void Calc::replyFinished(QNetworkReply *reply)
+{
+    QString bytesCount = QString::number( reply->bytesAvailable());
+    QString result = reply->readAll();
+
+    qDebug() << bytesCount << "Bytes received ";
+
+    qDebug() << result;
+
+    parseVersion(result);
+}
+
+/**
+ * Create http request for version data.
+ */
+void Calc::fetchVersion()
+{
+    qDebug() << "fetchVersion enter";
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://www.plaatsoft.nl/service/chatcostcalc.html"));
+
+    manager->get(request);
+
+    qDebug() << "fetchVersion leave ";
+}
+
+/**
+ * Parse data for version information
+ */
+void Calc::parseVersion(QString response)
+{
+   qDebug() << response;
+
+   QString text;
+   int pos = response.indexOf("Version ");
+   QString version = response.mid(pos+8,4).simplified();
+   qDebug() << "Version = [" << version << "]";
+
+   if (version.size()>0) {
+
+       if (version.compare(APPL_VERSION)!=0) {
+
+          text="ChatCostCalc v";
+          text+=version;
+          text+=" is available!<br>";
+          text+="Check out http://www.plaatsoft.nl for more information.";
+
+          QMessageBox::information(this, tr("New version available"),text);
+       }
+    }
 }
 
 // -----------------------------------------
