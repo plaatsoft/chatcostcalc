@@ -15,16 +15,13 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Desktop</value>
    <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Target.DesktopTarget</value>
-   <value key="ProjectExplorer.Target.ActiveBuildConfiguration" type="int">1</value>
+   <value key="ProjectExplorer.Target.ActiveBuildConfiguration" type="int">0</value>
    <value key="ProjectExplorer.Target.ActiveRunConfiguration" type="int">0</value>
    <valuemap key="ProjectExplorer.Target.BuildConfiguration.0" type="QVariantMap">
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
      <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">qmake</value>
      <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">QtProjectManager.QMakeBuildStep</value>
-     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList">
-      <value type="QString">-spec</value>
-      <value type="QString">../../../../qt/2010.05-rc1/qt/mkspecs/win32-g++</value>
-     </valuelist>
+     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList"/>
     </valuemap>
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.1" type="QVariantMap">
      <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
@@ -49,8 +46,8 @@
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Debug</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">C:/sources/Prive/Windows/ChatCostCalc/src</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">5</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">C:/Sources/Windows/ChatCostCalc/src</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">11</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">false</value>
    </valuemap>
@@ -58,10 +55,7 @@
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
      <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">qmake</value>
      <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">QtProjectManager.QMakeBuildStep</value>
-     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList">
-      <value type="QString">-spec</value>
-      <value type="QString">../../../../qt/2010.05-rc1/qt/mkspecs/win32-g++</value>
-     </valuelist>
+     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList"/>
     </valuemap>
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.1" type="QVariantMap">
      <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
@@ -86,8 +80,8 @@
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Release</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">C:/sources/Prive/Windows/ChatCostCalc/src</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">5</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">C:/Sources/Windows/ChatCostCalc/src</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">11</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">false</value>
    </valuemap>
