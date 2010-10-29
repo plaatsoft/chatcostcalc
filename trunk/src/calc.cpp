@@ -101,8 +101,7 @@ void Calc::statemachine() {
         for (int i=0;i<ui->spinBox->value();i++) {
 
             if (ui->tableWidget->item(i, 0)->checkState()) {
-               total+=ui->tableWidget->item(i,2)->text().toInt(&ok,10);
-               qDebug() << "total" << total;
+               total+=ui->tableWidget->item(i,1)->text().toInt(&ok,10);
             }
          }
          sum+= total * (1/36000.0);
@@ -120,7 +119,7 @@ void Calc::statemachine() {
          ui->timeEdit->setStyleSheet("QTimeEdit { background-color:#ff0000;color:#000000 }");
       }
 
-      // Update time onscreen
+      // Update time on screen
       ui->timeEdit->setTime(time->addSecs(counter/5));
 
       // Play sound effect if actived.
@@ -171,10 +170,10 @@ void Calc::writeSettings()
     for (int i=0; i<ui->spinBox->value(); i++) {
 
        QString key = QString("name%1").arg(i+1);
-       settings.setValue(key, ui->tableWidget->item(i,1)->text());
+       settings.setValue(key, ui->tableWidget->item(i,0)->text());
 
        key = QString("cost%1").arg(i+1);
-       settings.setValue(key, ui->tableWidget->item(i,2)->text().toInt(&ok,10));
+       settings.setValue(key, ui->tableWidget->item(i,1)->text().toInt(&ok,10));
     }
 
     // Store other settings
@@ -191,7 +190,7 @@ void Calc::writeSettings()
 // -----------------------------------------
 
 /**
- * Start & Stop button
+ * Start & Stop button click event
  */
 
 void Calc::on_startButton_clicked()
@@ -223,7 +222,7 @@ void Calc::on_startButton_clicked()
 }
 
 /**
- * Pause & continue button
+ * Pause & continue button click event
  */
 void Calc::on_pauseButton_clicked()
 {
@@ -237,50 +236,47 @@ void Calc::on_pauseButton_clicked()
 }
 
 /**
- * Spinbox on change event
+ * Amount of members Spinbox on change event
  */
 void Calc::on_spinBox_valueChanged(int value)
 {
    // Set table dimensions
-   ui->tableWidget->setColumnCount(3);
+   ui->tableWidget->setColumnCount(2);
    ui->tableWidget->setRowCount(value);
 
     QTableWidgetItem *item;
 
    // Build Header
-   ui->tableWidget->setColumnWidth(0,20);
-   item = new QTableWidgetItem("");
+   ui->tableWidget->setColumnWidth(0,170);
+   item = new QTableWidgetItem("Member Name");
    ui->tableWidget->setHorizontalHeaderItem(0, item);
 
-   ui->tableWidget->setColumnWidth(1,170);
-   item = new QTableWidgetItem("Member Name");
-   ui->tableWidget->setHorizontalHeaderItem(1, item);
-
-   ui->tableWidget->setColumnWidth(2,90);
+   ui->tableWidget->setColumnWidth(1,90);
    item = new QTableWidgetItem("Member Cost");
-   ui->tableWidget->setHorizontalHeaderItem(2, item);
+   ui->tableWidget->setHorizontalHeaderItem(1, item);
 
    QSettings settings("PlaatSoft", APPL_NAME);
 
    // Build Content
    for (int i=0; i<value; i++)
    {
-      item = new QTableWidgetItem();
+      QString key = QString("name%1").arg(i+1);
+      item = new QTableWidgetItem(settings.value(key, "").toString());
       item->setCheckState(Qt::Checked);
       ui->tableWidget->setItem(i, 0, item);
 
-      QString key = QString("name%1").arg(i+1);
-      item = new QTableWidgetItem(settings.value(key, "").toString());
-      ui->tableWidget->setItem(i, 1, item);
-
       key = QString("cost%1").arg(i+1);
       item = new QTableWidgetItem(settings.value(key, "").toString());
-      ui->tableWidget->setItem(i, 2, item);
+      ui->tableWidget->setItem(i, 1, item);
    }
 
    ui->dial->setValue(value);
 }
 
+
+/**
+ * Max Cost Value change event
+ */
 void Calc::on_maxCostSpinBox_valueChanged(int )
 {
    ui->lcdNumber->setStyleSheet("QLCDNumber { background-color:#ffffff; }");
@@ -288,7 +284,7 @@ void Calc::on_maxCostSpinBox_valueChanged(int )
 }
 
 /**
- * Dailer on change event
+ * Amount of members Dailer change event
  */
 void Calc::on_dial_valueChanged(int value)
 {

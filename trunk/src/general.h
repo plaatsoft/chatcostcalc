@@ -23,8 +23,8 @@
 #define GENERAL_H
 
 #define APPL_NAME             "ChatCostCalc"
-#define APPL_VERSION          "0.40"
-#define APPL_DATE             "28-10-2010"
+#define APPL_VERSION          "0.50"
+#define APPL_DATE             "29-10-2010"
 
 #define HORZ_SIZE             530
 #define VERT_SIZE             210
@@ -50,6 +50,10 @@
  *  - Internet new version check
  *
  * @section ReleaseNotes
+ *
+ *  <b>28-10-2010 Version 0.50</b>
+ *  - Bugfix in member editing.
+ *  - Improve about text.
  *
  *  <b>28-10-2010 Version 0.40</b>
  *  - Complete GUI rebuild (now tab based)
