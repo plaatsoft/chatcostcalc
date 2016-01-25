@@ -33,7 +33,6 @@
 
 /**
  * @mainpage ChatCostCalc Documentation
- * @image html ChatCostCalc.png
  * Welcome to the ChatCostCalc documentation.
  *
  * @section Introduction
